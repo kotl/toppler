@@ -4,6 +4,7 @@ import {playerDown} from '../assets/player/down';
 import {playerLeft} from '../assets/player/left';
 import {playerRight} from '../assets/player/right';
 import {cross} from '../assets/cross';
+import {soundPlayer} from '../services/sound-player';
 
 import {kbd} from '../services/kbd';
 
@@ -108,6 +109,7 @@ export class Player extends Drawable {
     }
 
     kill() {
+        soundPlayer.play('drowned');
         this.dead = true;
         --this.lives;
     }
@@ -117,6 +119,7 @@ export class Player extends Drawable {
 
         if (leaf.coin) {
             this.game.levelUp();
+            soundPlayer.play('coin');
         }
 
         if (!leaf.stepOn()) {

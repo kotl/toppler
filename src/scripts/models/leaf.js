@@ -7,6 +7,7 @@ import {brownBall} from '../assets/brown-ball';
 import {gameState} from '../services/game-state';
 import {gameCanvas} from '../services/game-canvas';
 import {Coin} from './coin';
+import {soundPlayer} from '../services/sound-player';
 
 
 export class Leaf extends Drawable {
@@ -41,7 +42,7 @@ export class Leaf extends Drawable {
         if (!data.special) {
             let extra = ~~(Math.random() * 100);
             if (extra == 2 && gameState.level > 2) {
-                this.extra = 'dark-red';
+                this.extra = 'darkRed';
             } if (extra == 3 && gameState.level > 2) {
                 this.extra = 'brown';
             } else if (extra >= 60 && extra < 90)
@@ -63,6 +64,7 @@ export class Leaf extends Drawable {
             gameState.kill();
         }
         this.state.waves = true;
+        soundPlayer.play('leaf');
     }
 
     clear() {
@@ -168,13 +170,23 @@ export class Leaf extends Drawable {
 
         if (this.extra) {
             switch (this.extra) {
-                case 'blue': gameState.addPoints(50); break;
-                case 'red': gameState.addPoints(1000); break;
-                case 'brown': gameState.addPoints(-500); break;
+                case 'blue': 
+                    gameState.addPoints(50); 
+                    soundPlayer.play('ball');
+                    break;
+                case 'red':
+                    gameState.addPoints(1000);
+                    soundPlayer.play('ball');
+                    break;
+                case 'brown':
+                    gameState.addPoints(-500);
+                    soundPlayer.play('ball');
+                    break;
                 case 'darkRed':
                     let rand = Math.random();
                     if (rand > 0.4) {
                         gameState.player.lives++;
+                        soundPlayer.play('one-up');
                     } else {
                         this.hide();
                     }
@@ -184,6 +196,8 @@ export class Leaf extends Drawable {
             gameState.catchBall(this.extra);
             
             this.extra = null;
+        } else {
+            soundPlayer.play('jump');
         }
         return true;
     }

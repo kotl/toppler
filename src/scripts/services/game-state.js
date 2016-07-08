@@ -2,12 +2,14 @@ import {gameStage} from './game-stage';
 import {Leaf} from '../models/leaf';
 import {Player} from '../models/player';
 import {TopMenu} from '../models/top-menu';
+import {soundPlayer} from './sound-player';
 
 export var gameState = {
     grid: null,
     level: 1,
     points: 0,
     player: null,
+    nextLive: 10000,
 
     reset() {
         this.level = 1;
@@ -18,6 +20,7 @@ export var gameState = {
             darkRed: 0,
             brown: 0
         };
+        this.nextLive = 10000;
         this.startLevel();
         this.startTime = Date.now();
         this.player.resurrect();
@@ -55,6 +58,11 @@ export var gameState = {
 
     addPoints(points) {
         this.points = Math.max(0, this.points + points * this.level);
+        if (this.points > this.nextLive) {
+            this.player.lives++;
+            soundPlayer.play('one-up');
+            this.nextLive = this.nextLive << 1;
+        }
         this.topMenu.update();
     },
 
