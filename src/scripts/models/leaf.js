@@ -11,11 +11,14 @@ import {soundPlayer} from '../services/sound-player';
 
 
 export class Leaf extends Drawable {
-    waveH = 100;
-    waveSpeed = 11.5;
 
-    health = 100;
-    state = {
+    constructor(data) {
+        super(data);
+    this.waveH = 100;
+    this.waveSpeed = 11.5;
+
+    this.health = 100;
+    this.state = {
         visible: !!Math.round(Math.random()),
         waves: false,
         get hidden() {
@@ -23,11 +26,9 @@ export class Leaf extends Drawable {
         }
     };
 
-    speed = Math.random() * 0.035;
-    respawnProb = Math.random();
+    this.speed = Math.random() * 0.035;
+    this.respawnProb = Math.random();
 
-    constructor(data) {
-        super(data);
 
         if (!gameCanvas.width || !gameState.sizeX) {
             throw new Error(`gameCanvas.width: ${gameCanvas.width} or gameState.sizeX: ${gameState.sizeX} not defined`);

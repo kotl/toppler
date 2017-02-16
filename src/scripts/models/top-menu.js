@@ -6,8 +6,10 @@ import {playerDown as player} from '../assets/player/down';
 import {gameState} from '../services/game-state';
 
 export class TopMenu extends Drawable {
-    _rendered = false;
-
+    constructor() {
+      super()
+      this._rendered = false;
+    }
     update() {
         this._rendered = false;
     }

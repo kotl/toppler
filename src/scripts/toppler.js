@@ -7,12 +7,12 @@ import {gameState} from './services/game-state';
 
 
 export class Toppler {
-    canvas = null;
-    ctx = null;
-    frame = null;
-    lastTimestamp = null;
-
     constructor() {
+      this.canvas = null;
+      this.ctx = null;
+      this.frame = null;
+      this.lastTimestamp = null;
+
         gameCanvas.setup();
         gameStage.setup();
         kbd.start();
