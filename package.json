@@ -14,39 +14,8 @@
     },
     "devDependencies": {
       "babel": "npm:babel-core@^5.8.24",
-      "babel-preset-stage-0": "npm:babel-preset-stage-0@^6.5.0",
       "babel-runtime": "npm:babel-runtime@^5.8.24",
-      "core-js": "npm:core-js@^1.1.4",
-      "plugin-babel": "npm:systemjs-plugin-babel@^0.0.12",
-      "socket.io-client": "npm:socket.io-client@^1.4.6",
-    },
-    "overrides": {
-      "npm:debug@2.2.0": {
-        "main": "browser.js",
-        "jspmNodeConversion": false,
-        "format": "cjs",
-        "map": {
-          "./browser.js": {
-            "node": "./node.js"
-          },
-          "fs": "@node/fs",
-          "net": "@node/net",
-          "tty": "@node/tty",
-          "util": "@node/util"
-        }
-      },
-      "npm:inherits@2.0.1": {
-        "ignore": [
-          "test.js"
-        ]
-      },
-      "npm:ms@0.7.1": {
-        "jspmNodeConversion": false,
-        "format": "cjs"
-      },
-      "npm:socket.io-client@1.4.6": {
-        "main": "lib/index.js"
-      }
+      "core-js": "npm:core-js@^2.4.1"
     }
   },
   "dependencies": {
